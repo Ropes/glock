@@ -36,8 +36,11 @@ func runApply(cmd *Command, args []string) {
 		return
 	}
 	var importPath = args[0]
+	fmt.Printf("Import path: %s\n", importPath)
 	var gopath = filepath.SplitList(build.Default.GOPATH)[0]
+	fmt.Printf("GOPATH in Glock: %s\n--------------------\n", gopath)
 	var book = buildPlaybook(readDiffLines(os.Stdin))
+	fmt.Printf("Book? %#v\n", book)
 
 	var updated = false
 	for _, cmd := range book.library {

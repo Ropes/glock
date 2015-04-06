@@ -122,6 +122,7 @@ func syncPkg(ch chan<- string, importPath, expectedRevision string) {
 
 	// Try to find the repo.
 	var getOutput []byte
+	fmt.Printf("SyncingPkg: %s\n", importPath)
 	var repo, err = fastRepoRoot(importPath)
 	if err != nil {
 		// go get it in case it doesn't exist. (no-op if it does exist)
@@ -162,6 +163,7 @@ func syncPkg(ch chan<- string, importPath, expectedRevision string) {
 
 	// Checkout the expected revision.  Don't use tagSync because it runs "git show-ref"
 	// which returns error if the revision does not correspond to a tag or head.
+	fmt.Printf("vcs.run: %s %s   %s\n", importDir, repo.vcs.tagSyncCmd, expectedRevision)
 	err = repo.vcs.run(importDir, repo.vcs.tagSyncCmd, "tag", expectedRevision)
 	if err != nil {
 		perror(err)

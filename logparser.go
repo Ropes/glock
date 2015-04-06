@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"regexp"
 )
@@ -53,12 +54,15 @@ var (
 
 func readDiffLines(reader io.Reader) []diff {
 	// Get the list of diffs from the commit log.
+	fmt.Printf("readifff?\n")
 	var (
 		diffs   []diff
 		scanner = bufio.NewScanner(reader)
 	)
+	fmt.Printf("scanning?\n")
 	for scanner.Scan() {
 		var txt = scanner.Text()
+		fmt.Printf("line: '%s'\n", txt)
 		if matches := libLineRegex.FindStringSubmatch(txt); matches != nil {
 			diffs = append(diffs, diff{
 				importPath: matches[1],

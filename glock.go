@@ -67,6 +67,7 @@ func main() {
 	}
 
 	for _, cmd := range commands {
+		fmt.Printf("Parsing cmd: %#v\n----------------------\n", cmd)
 		if cmd.Name() == args[0] && cmd.Run != nil {
 			cmd.Flag.Usage = func() { cmd.Usage() }
 			cmd.Flag.Parse(args[1:])
